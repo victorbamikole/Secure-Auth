@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const morgan = require("morgan");
 const connect = require("./db/conn.js");
+const dotenv = require("dotenv");
 
 
 // Middleware to parse JSON bodies
@@ -14,13 +15,15 @@ app.disable("x-powered-by");
 
 const authRouter = require("./router/routes.js");
 
+dotenv.config();
+
 // Route to handle GET requests to the root URL
 app.get("/", (req, res) => {
   res.status(201).json({ status: "Success" });
 });
 
 //routes
-app.use("/", authRouter);
+app.use("/api/", authRouter);
 
 
 // Route to handle POST requests to the '/api/data' endpoint
