@@ -112,7 +112,30 @@ module.exports = {
   },
 
   /** GET: http://localhost:3000/api/user/example123 */
-  getUser: async (req, res) => {},
+  getUser: async (req, res) => {
+    const { username } = req.params;
+
+    try {
+      if (!username) {
+        return res.status(400).send({ error: "Invalid username" });
+      }
+
+      const user = await UserModel.findOne({ username });
+
+      console.log("GETUSER", user)
+
+      if (!user) {
+        return res.status(404).send({ error: "User not found" });
+      }
+
+      // Remove password from user
+      const { password, ...rest } = user.toJSON();
+
+      return res.status(200).send(rest);
+    } catch (error) {
+      return res.status(500).send({ error: "Internal server error" });
+    }
+  },
 
   /** GET: http://localhost:3000/api/generateOTP */
   generateOTP: async (req, res) => {},
