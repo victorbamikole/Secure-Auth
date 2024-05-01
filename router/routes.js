@@ -12,7 +12,7 @@ router.post("/login", authController.verifyUser, authController.login); // login
 
 /** GET Methods */
 router.get("/user/:username", authController.getUser); // user with username
-router.get(
+router.get(  
   "/generateOTP",
   authController.verifyUser,
   localVariables,
