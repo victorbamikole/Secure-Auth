@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
   auth: {
-    user: "tommie.stamm9@ethereal.email",
-    pass: "JXu4ts1XsuSJJCRV3m",
+    user: "beulah.bernhard83@ethereal.email",
+    pass: "95BFZmtjEzcFh5TJ21",
   },
 });
 
@@ -43,6 +43,10 @@ module.exports = {
   registerMail: async (req, res) => {
     const { username, userEmail, text, subject } = req.body;
 
+     console.log("PROCESS", process.env.USERMAILER);
+     console.log("PROCESS", process.env.PASSWORDMAILER);
+
+
     // body of the email
     var email = {
       body: {
@@ -65,11 +69,6 @@ module.exports = {
     };
 
     // send mail
-
-    // try {
-    //   const sentMail = transporter.sendMail(message);
-    //   console.log("PRECESS", sentMail);
-    // } catch (error) {}
     transporter
       .sendMail(message)
       .then(() => {

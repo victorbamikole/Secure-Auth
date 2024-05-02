@@ -62,7 +62,10 @@ module.exports = {
 
       // check the user existance
       let exist = await UserModel.findOne({ username });
-      if (!exist) return res.status(404).send({ error: "Can't find User!" });
+    //   if (exist) return res.status(201).send({ status: "Success" });
+      if (!exist)
+        return res.status(404).send({ status: 404, error: "Can't find User!" });
+
       next();
     } catch (error) {
       return res.status(404).send({ error: "Authentication Error" });
