@@ -58,11 +58,11 @@ module.exports = {
 
   verifyUser: async (req, res, next) => {
     try {
-      const { username } = req.method == "GET" ? req.query : req.body;
+      const { username } = req.method === "GET" ? req.query : req.body;
 
       // check the user existance
       let exist = await UserModel.findOne({ username });
-    //   if (exist) return res.status(201).send({ status: "Success" });
+      //   if (exist) return res.status(201).send({ status: "Success" });
       if (!exist)
         return res.status(404).send({ status: 404, error: "Can't find User!" });
 
@@ -157,9 +157,12 @@ module.exports = {
     if (parseInt(req.app.locals.OTP) === parseInt(code)) {
       req.app.locals.OTP = null; // reset the OTP value
       req.app.locals.resetSession = true; // start session for reset password
+      console.log("Successsfully");
       return res.status(201).send({ msg: "Verify Successsfully!" });
+    } else {
+       console.log("ERRORLY");
+      return res.status(400).send({ error: "Invalid OTP" });
     }
-    return res.status(400).send({ error: "Invalid OTP" });
   },
 
   // successfully redirect user when OTP is valid

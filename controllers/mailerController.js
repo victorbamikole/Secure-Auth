@@ -16,8 +16,8 @@ const transporter = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
   auth: {
-    user: "beulah.bernhard83@ethereal.email",
-    pass: "95BFZmtjEzcFh5TJ21",
+    user: "alvis.pacocha47@ethereal.email",
+    pass: "199nV2xgFHNmSzHKMQ",
   },
 });
 
@@ -62,7 +62,7 @@ module.exports = {
     var emailBody = MailGenerator.generate(email);
 
     let message = {
-      from: process.env.USERMAILER,
+      from: "alvis.pacocha47@ethereal.email",
       to: userEmail,
       subject: subject || "Signup Successful",
       html: emailBody,
